@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Buku</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .header-container {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <div class="container">
+            <h2><i class="bi bi-pencil-square"></i> Edit Buku</h2>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form action="{{ url_for('update_book') }}" method="POST" class="needs-validation" novalidate>
+                    <input type="hidden" name="kode_buku" value="{{ book.Kode_Buku }}">
+                    <div class="mb-3">
+                        <label for="kode_buku" class="form-label">Kode Buku</label>
+                        <input type="text" class="form-control" value="{{ book.Kode_Buku }}" disabled>
+                        <small class="text-muted">Kode buku tidak dapat diubah</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama_buku" class="form-label">Nama Buku</label>
+                        <input type="text" class="form-control" id="nama_buku" name="nama_buku" 
+                               value="{{ book.Nama_Buku }}" required>
+                        <div class="invalid-feedback">
+                            Harap masukkan nama buku.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="penerbit" class="form-label">Penerbit</label>
+                        <input type="text" class="form-control" id="penerbit" name="penerbit" 
+                               value="{{ book.Penerbit }}" required>
+                        <div class="invalid-feedback">
+                            Harap masukkan penerbit.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pengarang" class="form-label">Pengarang</label>
+                        <input type="text" class="form-control" id="pengarang" name="pengarang" 
+                               value="{{ book.Pengarang }}" required>
+                        <div class="invalid-feedback">
+                            Harap masukkan pengarang.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jumlah_buku" class="form-label">Jumlah Buku</label>
+                        <input type="number" class="form-control" id="jumlah_buku" name="jumlah_buku" 
+                               value="{{ book.Jumlah_Buku }}" required min="0">
+                        <div class="invalid-feedback">
+                            Harap masukkan jumlah buku yang valid.
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Update
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>
